@@ -58,7 +58,6 @@ namespace BaltaStore.Domain.StoreContext.Entities
         public void Ship()
         {
             //A cada 5 produtos é uma entrega
-
             var deliveries = new List<Delivery>();
             var count = 1;
             foreach (var item in _items)
