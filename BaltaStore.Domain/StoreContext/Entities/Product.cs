@@ -18,10 +18,10 @@ namespace BaltaStore.Domain.StoreContext.Entities
             QuantityOnHand = quantityOnHand;
         }
 
-        public string Title { get; private set; }
-        public string Description { get; private set; }
-        public string Image { get; private set; }
-        public decimal Price { get; private set; }
+        public string Title { get; }
+        public string Description { get; }
+        public string Image { get; }
+        public decimal Price { get; }
         public decimal QuantityOnHand { get; private set; }
 
         public override string ToString()

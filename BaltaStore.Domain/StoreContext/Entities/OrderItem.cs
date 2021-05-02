@@ -18,8 +18,8 @@ namespace BaltaStore.Domain.StoreContext.Entities
             product.DecreaseQuantity(quantity);
         }
 
-        public Product Product { get; private set; }
-        public decimal Quantity { get; private set; }
-        public decimal Price { get; private set; }
+        public Product Product { get; }
+        public decimal Quantity { get; }
+        public decimal Price { get; }
     }
 }

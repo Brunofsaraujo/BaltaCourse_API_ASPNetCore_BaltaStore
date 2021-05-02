@@ -15,7 +15,7 @@ namespace BaltaStore.Domain.StoreContext.ValueObjects
             );
         }
 
-        public string Number { get; private set; }
+        public string Number { get; }
 
         public override string ToString()
         {
@@ -24,8 +24,8 @@ namespace BaltaStore.Domain.StoreContext.ValueObjects
 
         public bool Validate(string cpf)
         {
-            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            var multiplicador1 = new int[9] {10, 9, 8, 7, 6, 5, 4, 3, 2};
+            var multiplicador2 = new int[10] {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
             string tempCpf;
             string digito;
@@ -41,7 +41,7 @@ namespace BaltaStore.Domain.StoreContext.ValueObjects
             tempCpf = cpf.Substring(0, 9);
             soma = 0;
 
-            for (int i = 0; i < 9; i++)
+            for (var i = 0; i < 9; i++)
                 soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
 
             resto = soma % 11;
@@ -57,7 +57,7 @@ namespace BaltaStore.Domain.StoreContext.ValueObjects
 
             soma = 0;
 
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
                 soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
 
             resto = soma % 11;
@@ -67,7 +67,7 @@ namespace BaltaStore.Domain.StoreContext.ValueObjects
             else
                 resto = 11 - resto;
 
-            digito = digito + resto.ToString();
+            digito = digito + resto;
 
             return cpf.EndsWith(digito);
         }

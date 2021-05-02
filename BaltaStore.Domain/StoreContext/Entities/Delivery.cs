@@ -4,7 +4,7 @@ using FluentValidator;
 
 namespace BaltaStore.Domain.StoreContext.Entities
 {
-    public class Delivery: Notifiable
+    public class Delivery : Notifiable
     {
         public Delivery(DateTime estimetedDeliveryDate)
         {
@@ -13,8 +13,8 @@ namespace BaltaStore.Domain.StoreContext.Entities
             Status = EDeliveryStatus.Waiting;
         }
 
-        public DateTime CreateDate { get; private set; }
-        public DateTime EstimetedDeliveryDate { get; private set; }
+        public DateTime CreateDate { get; }
+        public DateTime EstimetedDeliveryDate { get; }
         public EDeliveryStatus Status { get; private set; }
 
         public void Ship()

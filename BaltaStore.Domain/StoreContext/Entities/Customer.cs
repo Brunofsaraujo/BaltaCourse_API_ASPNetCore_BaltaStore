@@ -22,10 +22,10 @@ namespace BaltaStore.Domain.StoreContext.Entities
             _addresses = new List<Address>();
         }
 
-        public Name Name { get; private set; }
-        public Document Document { get; private set; }
-        public Email Email { get; private set; }
-        public string Phone { get; private set; }
+        public Name Name { get; }
+        public Document Document { get; }
+        public Email Email { get; }
+        public string Phone { get; }
         public IReadOnlyCollection<Address> Addresses => _addresses.ToArray();
 
         public void AddAddress(Address address)

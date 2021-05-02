@@ -3,7 +3,7 @@ using FluentValidator;
 
 namespace BaltaStore.Domain.StoreContext.Entities
 {
-    public class Address: Notifiable
+    public class Address : Notifiable
     {
         public Address(
             string street,
@@ -27,15 +27,15 @@ namespace BaltaStore.Domain.StoreContext.Entities
             Type = type;
         }
 
-        public string Street { get; private set; }
-        public string Number { get; private set; }
-        public string Complement { get; private set; }
-        public string District { get; private set; }
-        public string City { get; private set; }
-        public string State { get; private set; }
-        public string Country { get; private set; }
-        public string ZipCode { get; private set; }
-        public EAddressType Type { get; private set; }
+        public string Street { get; }
+        public string Number { get; }
+        public string Complement { get; }
+        public string District { get; }
+        public string City { get; }
+        public string State { get; }
+        public string Country { get; }
+        public string ZipCode { get; }
+        public EAddressType Type { get; }
 
         public override string ToString()
         {

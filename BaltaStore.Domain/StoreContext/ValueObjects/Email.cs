@@ -15,7 +15,7 @@ namespace BaltaStore.Domain.StoreContext.ValueObjects
             );
         }
 
-        public string Address { get; private set; }
+        public string Address { get; }
 
         public override string ToString()
         {

@@ -1,15 +1,15 @@
-using BaltaStore.Domain.StoreContext.Enums;
-using FluentValidator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BaltaStore.Domain.StoreContext.Enums;
+using FluentValidator;
 
 namespace BaltaStore.Domain.StoreContext.Entities
 {
     public class Order : Notifiable
     {
-        private readonly IList<OrderItem> _items;
         private readonly IList<Delivery> _deliveries;
+        private readonly IList<OrderItem> _items;
 
         public Order(Customer customer)
         {
@@ -20,9 +20,9 @@ namespace BaltaStore.Domain.StoreContext.Entities
             _deliveries = new List<Delivery>();
         }
 
-        public Customer Customer { get; private set; }
+        public Customer Customer { get; }
         public string Number { get; private set; }
-        public DateTime CreateDate { get; private set; }
+        public DateTime CreateDate { get; }
         public EOrderStatus Status { get; private set; }
         public IReadOnlyCollection<OrderItem> Items => _items.ToArray();
         public IReadOnlyCollection<Delivery> Deliveries => _deliveries.ToArray();
@@ -65,8 +65,9 @@ namespace BaltaStore.Domain.StoreContext.Entities
                 if (count == 5)
                 {
                     count = 1;
-                    deliveries.Add(new Delivery(estimetedDeliveryDate: DateTime.Now.AddDays(5)));
+                    deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
                 }
+
                 count++;
             }
 

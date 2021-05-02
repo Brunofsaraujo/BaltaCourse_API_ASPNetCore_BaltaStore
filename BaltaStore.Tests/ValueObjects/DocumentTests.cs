@@ -6,8 +6,8 @@ namespace BaltaStore.Tests.ValueObjects
     [TestClass]
     public class DocumentTests
     {
-        private Document validDocument;
-        private Document invalidDocument;
+        private readonly Document invalidDocument;
+        private readonly Document validDocument;
 
         public DocumentTests()
         {

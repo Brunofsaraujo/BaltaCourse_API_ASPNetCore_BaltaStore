@@ -8,12 +8,12 @@ namespace BaltaStore.Tests.Entities
     [TestClass]
     public class OrderTests
     {
-        private Customer _customer;
-        private Order _order;
-        private Product _mouse;
-        private Product _keyboard;
+        private readonly Customer _customer;
+        private readonly Product _monitor;
+        private readonly Product _mouse;
+        private readonly Order _order;
         private Product _chair;
-        private Product _monitor;
+        private Product _keyboard;
 
         public OrderTests()
         {
@@ -119,10 +119,7 @@ namespace BaltaStore.Tests.Entities
 
             _order.Cancel();
 
-            foreach (var x in _order.Deliveries)
-            {
-                Assert.AreEqual(EDeliveryStatus.Canceled, x.Status);
-            }
+            foreach (var x in _order.Deliveries) Assert.AreEqual(EDeliveryStatus.Canceled, x.Status);
         }
     }
 }

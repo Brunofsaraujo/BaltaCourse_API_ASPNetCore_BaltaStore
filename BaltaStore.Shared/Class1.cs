@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BaltaStore.Shared
+﻿namespace BaltaStore.Shared
 {
     public class Class1
     {
