@@ -23,7 +23,7 @@ namespace BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs
                 .IsEmail(Email, "Email", "O E-mail é inválido")
                 .HasLen(Document, 11, "Document", "CPF Inválido")
             );
-            return Valid();
+            return base.Valid;
         }
 
         // Se o usuário existe no banco (Email)
