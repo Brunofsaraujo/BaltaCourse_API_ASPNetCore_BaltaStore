@@ -121,5 +121,7 @@ namespace BaltaStore.Tests.Entities
 
             foreach (var x in _order.Deliveries) Assert.AreEqual(EDeliveryStatus.Canceled, x.Status);
         }
+
+        
     }
 }
