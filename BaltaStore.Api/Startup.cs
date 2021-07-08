@@ -6,9 +6,9 @@ using BaltaStore.Infra.StoreContext.Repositories;
 using BaltaStore.Infra.StoreContext.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace BaltaStore.Api
 {
@@ -18,6 +18,11 @@ namespace BaltaStore.Api
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Balta Store", Version = "v1" });
+            });
+
             services.AddResponseCompression();
 
             services.AddScoped<BaltaDataContext, BaltaDataContext>();
@@ -26,7 +31,6 @@ namespace BaltaStore.Api
             services.AddTransient<CustomerHandler, CustomerHandler>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -34,6 +38,12 @@ namespace BaltaStore.Api
 
             app.UseMvc();
             app.UseResponseCompression();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("./swagger/v1/swagger.json", "Balta Store - V1");
+                c.RoutePrefix = string.Empty;
+            });
         }
     }
 }
