@@ -1,46 +1,59 @@
 using System;
 using System.Collections.Generic;
+using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
+using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Outputs;
 using BaltaStore.Domain.StoreContext.Entities;
-using BaltaStore.Domain.StoreContext.ValueObjects;
+using BaltaStore.Domain.StoreContext.Handlers;
+using BaltaStore.Domain.StoreContext.Queries;
+using BaltaStore.Domain.StoreContext.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaltaStore.Api.Controllers
 {
     public class CustomerController : Controller
     {
+        private readonly ICustomerRepository _customerRepository;
+        private readonly CustomerHandler _handler;
+
+        public CustomerController(
+            ICustomerRepository customerRepository,
+            CustomerHandler handler)
+        {
+            _customerRepository = customerRepository;
+            _handler = handler;
+        }
+
         [HttpGet]
         [Route("customers")]
-        public List<Customer> Get()
+        public IEnumerable<ListCustomerQueryResult> Get()
         {
-            var customer = new Customer(
-                name: new Name(firstName: "FirstName", lastName: "LastName"),
-                document: new Document("123.123.123-12"),
-                email: new Email("teste@hotmail.com"),
-                phone: "988129184"
-            );
-
-            return new List<Customer>() { customer };
+            return _customerRepository.Get();
         }
 
         [HttpGet]
         [Route("customers/{id}")]
-        public Customer GetById(Guid id)
+        public GetCustomerQueryResult GetById(Guid id)
         {
-            return null;
+            return _customerRepository.Get(id);
         }
 
         [HttpGet]
         [Route("customers/{id}/orders")]
-        public List<Order> GetOrders(Guid id)
+        public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
         {
-            return null;
+            return _customerRepository.GetOrders(id);
         }
 
         [HttpPost]
         [Route("customers")]
-        public Customer Post([FromBody] Customer customer)
+        public object Post([FromBody] CreateCustomerCommand command)
         {
-            return null;
+            var result = (CreateCustomerCommandResult)_handler.Handle(command);
+
+            if (_handler.Invalid)
+                return BadRequest(_handler.Notifications);
+
+            return result;
         }
 
         [HttpPut]
